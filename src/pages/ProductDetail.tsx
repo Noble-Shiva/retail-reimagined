@@ -7,11 +7,13 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { products } from "@/data/products";
 import { useToast } from "@/hooks/use-toast";
+import { useCart } from "@/contexts/CartContext";
 
 const ProductDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { addItem } = useCart();
   const [selectedSize, setSelectedSize] = useState("small");
   const [quantity, setQuantity] = useState(1);
 
@@ -42,6 +44,16 @@ const ProductDetail = () => {
   ];
 
   const handleAddToCart = () => {
+    for (let i = 0; i < quantity; i++) {
+      addItem({
+        id: `${product.id}-${selectedSize}`,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        variant: selectedSize,
+      });
+    }
+    
     toast({
       title: "Added to cart!",
       description: `${quantity}x ${product.name} (${selectedSize}) added to your cart.`,

@@ -4,6 +4,8 @@ import { TopNavigation } from "@/components/TopNavigation";
 import { RewardsCard } from "@/components/RewardsCard";
 import { SaleBanner } from "@/components/SaleBanner";
 import { ProductCard } from "@/components/ProductCard";
+import { CartDrawer } from "@/components/CartDrawer";
+import { FloatingCartBar } from "@/components/FloatingCartBar";
 import { getProductsByCategory } from "@/data/products";
 
 const Index = () => {
@@ -64,6 +66,9 @@ const Index = () => {
           </div>
         </main>
       </div>
+      
+      <CartDrawer />
+      <FloatingCartBar />
     </div>
   );
 };
