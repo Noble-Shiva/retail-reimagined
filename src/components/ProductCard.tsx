@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 
 interface ProductCardProps {
@@ -9,13 +10,18 @@ interface ProductCardProps {
   onSale?: boolean;
 }
 
-export const ProductCard = ({ name, image, price, originalPrice, onSale }: ProductCardProps) => {
+export const ProductCard = ({ id, name, image, price, originalPrice, onSale }: ProductCardProps) => {
+  const navigate = useNavigate();
   const discountPercentage = originalPrice 
     ? Math.round(((originalPrice - price) / originalPrice) * 100)
     : 0;
 
+  const handleClick = () => {
+    navigate(`/product/${id}`);
+  };
+
   return (
-    <div className="group bg-card rounded-xl shadow-card hover:shadow-soft transition-all duration-300 overflow-hidden cursor-pointer">
+    <div className="group bg-card rounded-xl shadow-card hover:shadow-soft transition-all duration-300 overflow-hidden cursor-pointer" onClick={handleClick}>
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-muted">
         <img
